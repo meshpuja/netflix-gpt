@@ -14,6 +14,19 @@
 -implementedd sign out
 -update profile
 -fetch movie from tmdb
+-bugfix- signup user display name and photo url
+-bugfix- if user is not logged in redirect /browse to to /login page
+-unsubscribe to the onauthstatecgange callback
+-add hardcode values to the constant file
+-register for tmdb api and made a fetch call for now playing
+-custom hook now playing
+-create slice
+-planning for main and secondary container
+-fetch data fopr trailer vide
+-update store wityn trailer data
+
+- embeded youtube video and ran autoplay
+  -maincontainer look awesome
 
 #features
 Login page

@@ -1,5 +1,4 @@
 import React, { useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import Header from "./Header";
 import checkFormValidation from "./Utils/util";
 import { auth } from "./Utils/firebase";
@@ -10,9 +9,9 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { useDispatch } from "react-redux";
+import { Photo_URL } from "./Utils/constants";
 
 const Login = () => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [toggleSignInBtn, settoggleSignInBtn] = useState(true);
   const [errorMsg, setErrorMsg] = useState("");
@@ -40,8 +39,7 @@ const Login = () => {
           const user = userCredential.user;
           updateProfile(user, {
             displayName: name?.current?.value,
-            photoURL:
-              "https://avatars.githubusercontent.com/u/140896390?s=400&u=d4b4f69d5816042216c97272336c650da60e1bdc&v=4",
+            photoURL: { Photo_URL },
           })
             .then(() => {
               const { uid, email, displayName, photoURL } = auth.currentUser;
@@ -53,8 +51,6 @@ const Login = () => {
                   photoURL: photoURL,
                 })
               );
-              navigate("/browse");
-              // Profile updated!
               // ...
             })
             .catch((error) => {
@@ -80,7 +76,6 @@ const Login = () => {
           // Signed in
           const user = userCredential.user;
           console.log(user);
-          navigate("/browse");
           // ...
         })
         .catch((error) => {
