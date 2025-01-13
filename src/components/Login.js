@@ -1,10 +1,94 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Header from "./Header";
+import checkFormValidation from "./Utils/util";
+import { auth } from "./Utils/firebase";
+import { updateProfile } from "firebase/auth";
+import { adduser } from "./Utils/userSlice";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { useDispatch } from "react-redux";
 
 const Login = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [toggleSignInBtn, settoggleSignInBtn] = useState(true);
+  const [errorMsg, setErrorMsg] = useState("");
+  const email = useRef(null);
+  const password = useRef(null);
+  const name = useRef(null);
   const toggleSignIn = () => {
     settoggleSignInBtn(!toggleSignInBtn);
+  };
+  const handleBtnClick = () => {
+    const errorMessage = checkFormValidation(
+      name?.current?.value,
+      email.current.value,
+      password.current.value
+    );
+    setErrorMsg(errorMessage);
+    if (errorMessage) return;
+    if (!toggleSignInBtn) {
+      createUserWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          const user = userCredential.user;
+          updateProfile(user, {
+            displayName: name?.current?.value,
+            photoURL:
+              "https://avatars.githubusercontent.com/u/140896390?s=400&u=d4b4f69d5816042216c97272336c650da60e1bdc&v=4",
+          })
+            .then(() => {
+              const { uid, email, displayName, photoURL } = auth.currentUser;
+              dispatch(
+                adduser({
+                  uid: uid,
+                  email: email,
+                  displayName: displayName,
+                  photoURL: photoURL,
+                })
+              );
+              navigate("/browse");
+              // Profile updated!
+              // ...
+            })
+            .catch((error) => {
+              setErrorMsg(error.message);
+              // An error occurred
+              // ...
+            });
+
+          console.log(user);
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMsg(errorCode + "-" + errorMessage);
+        });
+    } else {
+      signInWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          console.log(user);
+          navigate("/browse");
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMsg(errorCode + "-" + errorMessage);
+        });
+    }
   };
   return (
     <div>
@@ -15,18 +99,23 @@ const Login = () => {
           alt="bg"
         />
       </div>
-      <form className="w-3/12 absolute bg-black opacity-100 p-12 my-36 mx-auto right-0 left-0 rounded-md text-white ">
+      <form
+        className="w-3/12 absolute bg-black opacity-100 p-12 my-36 mx-auto right-0 left-0 rounded-md text-white "
+        onSubmit={(e) => e.preventDefault()}
+      >
         <h2 className="text-3xl py-4">
           {toggleSignInBtn ? "Sign In" : "Sign Up"}
         </h2>
         {!toggleSignInBtn && (
           <input
+            ref={name}
             type="text"
             placeholder="Full Name"
             className=" bg-gray-700 p-2  my-2 w-full "
           />
         )}
         <input
+          ref={email}
           type="text"
           placeholder="Email"
           className="bg-gray-700 p-2  my-2 w-full
@@ -34,11 +123,16 @@ const Login = () => {
         />
 
         <input
+          ref={password}
           type="password"
           placeholder="Password"
           className=" bg-gray-700 p-2  my-2 w-full "
         />
-        <button className="bg-red-700 p-4 my-4 mx-1 w-full rounded-md ">
+        <p className="text-red-500">{errorMsg}</p>
+        <button
+          className="bg-red-700 p-4 my-4 mx-1 w-full rounded-md "
+          onClick={handleBtnClick}
+        >
           {toggleSignInBtn ? "Sign In" : "Sign Up"}
         </button>
         <p className="p-4 cursor-pointer" onClick={toggleSignIn}>

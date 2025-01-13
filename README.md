@@ -4,6 +4,16 @@
 -header
 -login form
 -sign up form
+-routing
+-form validation(use ref hook)
+-firebase setup
+-firebase deploy
+-create sign up user account
+-implement sign in user api
+-created redux store with user slice
+-implementedd sign out
+-update profile
+-fetch movie from tmdb
 
 #features
 Login page
