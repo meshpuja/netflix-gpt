@@ -1,0 +1,20 @@
+import { useDispatch } from "react-redux";
+import { SPI_OPtions } from "../Utils/constants";
+import { addUpcoming } from "../Utils/movieSlice";
+import { useEffect } from "react";
+
+const useUpcomingMovies = () => {
+  const dispatch = useDispatch();
+  const getupcomingData = async () => {
+    const url =
+      "https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1";
+    const data = await fetch(url, SPI_OPtions);
+    const upcoming = await data.json();
+    dispatch(addUpcoming(upcoming.results));
+  };
+
+  useEffect(() => {
+    getupcomingData();
+  }, []);
+};
+export default useUpcomingMovies;

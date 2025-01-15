@@ -27,6 +27,7 @@
 
 - embeded youtube video and ran autoplay
   -maincontainer look awesome
+  -build secondary component
 
 #features
 Login page

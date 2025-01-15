@@ -11,7 +11,6 @@ const useNowPlayingMovies = () => {
     const data = await fetch(url, SPI_OPtions);
     const now_playing = await data.json();
     dispatch(addNowPlaying(now_playing.results));
-    //console.log(now_playing.results);
   };
 
   useEffect(() => {

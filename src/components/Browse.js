@@ -4,8 +4,15 @@ import MainContainer from "./MainContainer";
 import Secondarycontainer from "./Secondarycontainer";
 
 import useNowPlayingMovies from "./hooks/useNowPlayingMovies";
+import usePopularPlayingMovies from "./hooks/usePopularPlayingMovies";
+import useTopRatedPlayingMovies from "./hooks/useTopRatedPlayingMovies";
+import useUpcomingMovies from "./hooks/useUpcomingMovies";
 const Browse = () => {
+  console.log("useNowPlayingMovies");
   useNowPlayingMovies();
+  usePopularPlayingMovies();
+  useTopRatedPlayingMovies();
+  useUpcomingMovies();
   return (
     <div>
       <Header />
