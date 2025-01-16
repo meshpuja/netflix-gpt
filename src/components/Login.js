@@ -9,7 +9,7 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { useDispatch } from "react-redux";
-import { Photo_URL } from "./Utils/constants";
+import { BG_URL, Photo_URL } from "./Utils/constants";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -89,10 +89,7 @@ const Login = () => {
     <div>
       <Header />
       <div className="absolute">
-        <img
-          src="https://assets.nflxext.com/ffe/siteui/vlv3/dc1cf82d-97c9-409f-b7c8-6ac1718946d6/14a8fe85-b6f4-4c06-8eaf-eccf3276d557/IN-en-20230911-popsignuptwoweeks-perspective_alpha_website_medium.jpg"
-          alt="bg"
-        />
+        <img src={BG_URL} alt="bg" />
       </div>
       <form
         className="w-3/12 absolute bg-black opacity-100 p-12 my-36 mx-auto right-0 left-0 rounded-md text-white "

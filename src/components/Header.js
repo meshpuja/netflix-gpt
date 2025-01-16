@@ -5,12 +5,22 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { onAuthStateChanged } from "firebase/auth";
 import { adduser, removeuser } from "./Utils/userSlice";
-import { Logo_URL } from "./Utils/constants";
+import { Logo_URL, Supported_lang } from "./Utils/constants";
+import { toggleGptShow } from "./Utils/gptSlice";
+import { changeLang } from "./Utils/configSlice";
 
 const Header = () => {
+  const showGPTSEarch = useSelector((store) => store.gpt.showGptSearch);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector((store) => store.user);
+  const handleLang = (e) => {
+    console.log(e.target.value);
+    dispatch(changeLang(e.target.value));
+  };
+  const handleGTPToggle = () => {
+    dispatch(toggleGptShow());
+  };
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {
@@ -53,6 +63,24 @@ const Header = () => {
       <img className="w-40" src={Logo_URL} alt="logo" />
       {user && (
         <div className="flex p-4">
+          {showGPTSEarch && (
+            <select
+              className="m-2 p-2 bg-gray-900 text-white rounded-lg"
+              onChange={handleLang}
+            >
+              {Supported_lang.map((e) => (
+                <option key={e.identifier} value={e.identifier}>
+                  {e.name}
+                </option>
+              ))}
+            </select>
+          )}
+          <button
+            className="py-2 px-4 mx-4 my-2 bg-purple-500 rounded-lg text-white"
+            onClick={handleGTPToggle}
+          >
+            {showGPTSEarch ? "Home Page" : "GPT Search"}
+          </button>
           <img className="w-12 h-12" src={user?.photoURL} alt="userIcon"></img>
           <button
             onClick={handleSignOut}

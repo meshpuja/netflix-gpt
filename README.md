@@ -28,6 +28,14 @@
 - embeded youtube video and ran autoplay
   -maincontainer look awesome
   -build secondary component
+  -movielist
+  -moviecard
+  -fetch popplar trending movies
+  -gpt search feature
+  -gpt search page
+  =gpt search bar
+  -multi language feature in our app
+  -Integrate gpt API
 
 #features
 Login page
