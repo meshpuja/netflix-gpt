@@ -6,8 +6,7 @@ export const SPI_OPtions = {
   method: "GET",
   headers: {
     accept: "application/json",
-    Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiNDE0NWRhN2Y1ODA4MmVkNjEyZjUyZWZhYmY2MWE1MCIsIm5iZiI6MTczNjYwMTkxOS45ODQsInN1YiI6IjY3ODI3MTNmYmQ3OTNjMDM1NDRlNjU3NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.jpX9fJ1LyBqugJmXYj_N4cAipvYiNlFAE2ayT5H29dM",
+    Authorization: "Bearer" + process.env.REACT_APP_TMDB_TOKEN,
   },
 };
 export const CDN_URL = "https://image.tmdb.org/t/p/w500/";
@@ -17,3 +16,4 @@ export const Supported_lang = [
   { identifier: "en", name: "English" },
   { identifier: "hindi", name: "Hindi" },
 ];
+export const open_AI = process.env.REACT_APP_open_AI;

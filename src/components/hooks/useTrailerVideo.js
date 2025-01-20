@@ -1,10 +1,11 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { SPI_OPtions } from "../Utils/constants";
 import { addTrailer } from "../Utils/movieSlice";
 import { useEffect } from "react";
 
 const useTrailerVideo = (movieId) => {
   const dispatch = useDispatch();
+  const trailerVideo = useSelector((store) => store.movies.trailerVideo);
 
   const getVideoAPI = async () => {
     const url =
@@ -19,7 +20,7 @@ const useTrailerVideo = (movieId) => {
     dispatch(addTrailer(trailer));
   };
   useEffect(() => {
-    getVideoAPI();
+    !trailerVideo && getVideoAPI();
   }, []);
 };
 export default useTrailerVideo;
