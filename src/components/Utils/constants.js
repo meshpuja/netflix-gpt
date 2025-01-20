@@ -6,7 +6,7 @@ export const SPI_OPtions = {
   method: "GET",
   headers: {
     accept: "application/json",
-    Authorization: "Bearer" + process.env.REACT_APP_TMDB_TOKEN,
+    Authorization: "Bearer " + process.env.REACT_APP_TMDB_TOKEN,
   },
 };
 export const CDN_URL = "https://image.tmdb.org/t/p/w500/";
@@ -16,4 +16,4 @@ export const Supported_lang = [
   { identifier: "en", name: "English" },
   { identifier: "hindi", name: "Hindi" },
 ];
-export const open_AI = process.env.REACT_APP_open_AI;
+export const open_AI = process.env.REACT_APP_OPEN_AI;

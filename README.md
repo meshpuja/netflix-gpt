@@ -36,6 +36,12 @@
   =gpt search bar
   -multi language feature in our app
   -Integrate gpt API
+  -gpt slice
+  -gpt search movie tmdb api
+  -reuse movielist
+  -env variable
+  -memoization
+  -responsive UI
 
 #features
 Login page
