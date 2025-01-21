@@ -1,4 +1,4 @@
-const checkFormValidation = (name?, email, passwrd) => {
+const checkFormValidation = (name, email, passwrd) => {
   const validName = /^[A-Za-z][A-Za-z0-9_]{7,29}$/.test(name);
   const validEmail = /^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/.test(
     email
