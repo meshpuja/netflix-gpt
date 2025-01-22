@@ -17,6 +17,7 @@ const useTopRatedPlayingMovies = () => {
 
   useEffect(() => {
     !topRated && getTopRatedPlayingData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 };
 export default useTopRatedPlayingMovies;
